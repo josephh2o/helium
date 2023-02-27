@@ -2,6 +2,7 @@ from canvasapi import Canvas
 from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 import os
+import pytz
 
 def main():
     API_URL = os.getenv("API_URL")
@@ -38,7 +39,9 @@ def main():
             if assignment.due_at_date < current_date or assignment.due_at_date > current_date + timedelta(days=7):
                 continue
             assignment_list.append(assignment)
-            assignment_list.sort(key=lambda x: x.due_at_date)
+
+        # Sort the assignments by due date
+        assignment_list.sort(key=lambda x: x.due_at_date)
 
         # Print a message if there are no assignments
         if not assignment_list:
@@ -46,8 +49,7 @@ def main():
 
         # Print all assignments for the course
         for assignment in assignment_list:
-            print("\t" + assignment.due_at_date.strftime("%m/%d/%Y, %H:%M:%S") + "\t" + assignment.name)
-
+            print("\t" + assignment.due_at_date.astimezone().strftime("%m/%d/%Y %H:%M:%S") + "\t" + assignment.name)
 
 if __name__ == "__main__":
     main()
