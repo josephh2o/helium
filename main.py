@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import pytz
 
+
 def main():
     API_URL = os.getenv("API_URL")
     API_TOKEN = os.getenv("API_TOKEN")
@@ -50,6 +51,7 @@ def main():
         # Print all assignments for the course
         for assignment in assignment_list:
             print("\t" + assignment.due_at_date.astimezone().strftime("%m/%d/%Y %H:%M:%S") + "\t" + assignment.name)
+
 
 if __name__ == "__main__":
     main()
