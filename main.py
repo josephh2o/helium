@@ -71,16 +71,6 @@ def main():
     # Add tasks to appropriate task list
     try:
         service = build('tasks', 'v1', credentials=creds)
-
-        # Check if there list a task list called "Homework". If not, create one.
-        tasklists = service.tasklists().list().execute()["items"]
-        for tasklist in tasklists:
-            if tasklist["title"] == "Homework":
-                break
-            else:
-                service.tasklists().insert(body={"title": "Homework"}).execute()
-
-        # Get the task list called "Homework"
         tasklist = service.tasklists().list().execute()["items"][0]["id"]
 
         # Add a task for each assignment
