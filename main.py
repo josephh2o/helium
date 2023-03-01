@@ -7,8 +7,9 @@ import pytz
 
 # create a new course object
 class Course:
-    def __init__(self, course_code, assignments):
+    def __init__(self, course_code, name, assignments):
         self.course_code = course_code
+        self.name = name
         self.assignments = assignments
 
 
@@ -42,12 +43,12 @@ def main():
                     continue
                 assignment_list.append(assignment)
             assignment_list.sort(key=lambda x: x.due_at_date)
-            course_list.append(Course(course.course_code, assignment_list))
+            course_list.append(Course(course.course_code, course.name, assignment_list))
 
     # Print assignments for the next week in each course
     for course in course_list:
         print("---------------------------------")
-        print(course.course_code)
+        print(course.name)
         assignment_list = []
         for assignment in course.assignments:
             if not hasattr(assignment, "due_at") or assignment.due_at is None:
