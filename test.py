@@ -11,14 +11,14 @@ class Course:
         self.course_code = course_code
         self.assignments = assignments
 
+
 class Assignment:
     def __init__(self, course_code, assignments):
         self.course_code = course_code
         self.assignments = assignments
 
-
-
 def main():
+    # Load environment variables
     API_URL = os.getenv("API_URL")
     API_TOKEN = os.getenv("API_TOKEN")
 
