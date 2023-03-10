@@ -9,3 +9,4 @@ helium works to integrate Canvas API and Google Tasks/Calendar API, creating a s
 - [x] Add assignments to Google Tasks _(buggy)_
 - [ ] Add assignments to Google Calendar
 - [ ] Add assignments to Google Calendar with predictive scheduling
+- [ ] Create UI for user
