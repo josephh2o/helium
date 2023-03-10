@@ -37,7 +37,8 @@ def main():
     else:
         course_date = "FA" + str(current_date.year)[2:]
 
-    # Create new course object for each course and add to course_list, while sorting assignments by due date
+    # Create new course object for each course and add to course_list, while sorting assignments
+    # by due date
     course_list = []
     for course in courses:
         if not hasattr(course, "enrollment_term_id"):
@@ -48,7 +49,8 @@ def main():
             for assignment in assignments:
                 if not hasattr(assignment, "due_at") or assignment.due_at is None:
                     continue
-                if assignment.due_at_date < current_date or assignment.due_at_date > current_date + timedelta(days=7):
+                if assignment.due_at_date < current_date or assignment.due_at_date > current_date \
+                        + timedelta(days=7):
                     continue
                 assignment_list.append(assignment)
             assignment_list.sort(key=lambda x: x.due_at_date)
