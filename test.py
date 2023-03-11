@@ -13,9 +13,10 @@ class Course:
 
 
 class Assignment:
-    def __init__(self, course_code, assignments):
-        self.course_code = course_code
+    def __init__(self, name, assignments):
+        self.course_code = name
         self.assignments = assignments
+
 
 def main():
     # Load environment variables
