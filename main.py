@@ -74,6 +74,7 @@ def main():
     try:
         service = build('tasks', 'v1', credentials=creds)
         tasklist = service.tasklists().list().execute()["items"][0]["id"]
+        tasks = service.tasks().list(tasklist=tasklist).execute()["items"]
 
         # Add a task for each assignment
         for course in course_list:
@@ -84,7 +85,15 @@ def main():
                     "title": course.name[:course.name.index(":")] + ": " + assignment.name,
                     "due": assignment.due_at_date.astimezone().isoformat()
                 }
-                service.tasks().insert(tasklist=tasklist, body=task).execute()
+
+                # Check for duplicate tasks, if no duplicates, add task
+                duplicate = False
+                for items in tasks:
+                    if items["title"] == task["title"]:
+                        duplicate = True
+                        break
+                if not duplicate:
+                    service.tasks().insert(tasklist=tasklist, body=task).execute()
 
     except HttpError as err:
         print(err)
