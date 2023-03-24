@@ -83,7 +83,8 @@ def main():
                 task = {
                     # Use only the course name
                     "title": course.name[:course.name.index(":")] + ": " + assignment.name,
-                    "due": assignment.due_at_date.astimezone().isoformat()
+                    "due": assignment.due_at_date.astimezone().replace(hour=0, minute=0, second=0)
+                    .isoformat()
                 }
 
                 # Check for duplicate tasks, if no duplicates, add task
